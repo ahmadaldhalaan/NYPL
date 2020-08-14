@@ -1,0 +1,28 @@
+/* Remove MenuPage records that link to non-existent Menu record */
+
+DELETE FROM MenuPage WHERE id > 0 AND menu_id IN
+ (SELECT menu_id FROM
+ ((SELECT menu_id FROM menus.MenuPage WHERE menu_id IS NOT NULL AND menu_id NOT IN (SELECT id FROM Menu)))
+ AS x)
+5803 row(s) affected
+ 
+ /* Remove MenuItem records that link to non-existent MenuPage record */
+
+DELETE FROM MenuItem WHERE id > 0 AND menu_page_id IN
+ (SELECT menu_page_id FROM
+ ((SELECT menu_page_id FROM menus.MenuItem WHERE menu_page_id IS NOT NULL AND menu_page_id NOT IN (SELECT id FROM MenuPage)))
+ AS x)
+5373 row(s) affected
+
+ /* Remove MenuItem records that link to non-existent Dish record */
+
+DELETE FROM MenuItem WHERE id > 0 AND dish_id IN
+ (SELECT dish_id FROM
+ ((SELECT dish_id FROM menus.MenuItem WHERE dish_id IS NOT NULL AND dish_id NOT IN (SELECT id FROM Dish)))
+ AS x)
+3 row(s) affected
+
+ /* Remove MenuItem records that have null dish_id */
+
+DELETE FROM MenuItem WHERE id > 0 AND dish_id IS NULL
+241 row(s) affected

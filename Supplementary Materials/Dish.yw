@@ -1,0 +1,185 @@
+#@begin Parallel_OR #@desc Parallel OpenRefine Workflow
+#@param expression:value.toNumber()
+#@param expression:jython:if_value_<_1850_or_value_>_2020:
+__return_None
+else:
+__return_value
+#@param expression:value
+#@param expression:value.replace(/\\s+/,'_')
+#@param expression:value.trim()
+#@in name_3
+#@in name_4
+#@in id
+#@in name_12
+#@in name_13
+#@in name
+#@in name_10
+#@in name_14
+#@in name_8
+#@in last_appeared
+#@in menus_appeared
+#@in description
+#@in name_1
+#@in times_appeared
+#@in lowest_price
+#@in first_appeared_1
+#@in highest_price
+#@in last_appeared_1
+#@in name_6
+#@in first_appeared
+#@in name_9
+#@in name_7
+#@in name_2
+#@in name_11
+#@in name_5
+#@out CleanData
+#@begin core/text-transform0 #@desc Text transform on cells in column name using expression value.trim()
+#@param expression:value.trim()
+#@in name
+#@out name_1
+#@end core/text-transform0
+#@begin core/text-transform1 #@desc Text transform on cells in column name using expression value.replace(/\\s+/,' ')
+#@param expression:value.replace(/\\s+/,'_')
+#@in name_1
+#@out name_2
+#@end core/text-transform1
+#@begin core/text-transform2 #@desc Text transform on cells in column id using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in id
+#@out id_1
+#@end core/text-transform2
+#@begin core/text-transform3 #@desc Text transform on cells in column menus_appeared using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in menus_appeared
+#@out menus_appeared_1
+#@end core/text-transform3
+#@begin core/text-transform4 #@desc Text transform on cells in column times_appeared using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in times_appeared
+#@out times_appeared_1
+#@end core/text-transform4
+#@begin core/text-transform5 #@desc Text transform on cells in column first_appeared using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in first_appeared
+#@out first_appeared_1
+#@end core/text-transform5
+#@begin core/text-transform6 #@desc Text transform on cells in column last_appeared using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in last_appeared
+#@out last_appeared_1
+#@end core/text-transform6
+#@begin core/text-transform7 #@desc Text transform on cells in column lowest_price using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in lowest_price
+#@out lowest_price_1
+#@end core/text-transform7
+#@begin core/text-transform8 #@desc Text transform on cells in column highest_price using expression value.toNumber()
+#@param expression:value.toNumber()
+#@in highest_price
+#@out highest_price_1
+#@end core/text-transform8
+#@begin core/column-removal9 #@desc Remove column description
+#@in description
+#@out remove-description
+#@end core/column-removal9
+#@begin core/mass-edit10 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_2
+#@out name_3
+#@end core/mass-edit10
+#@begin core/mass-edit11 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_3
+#@out name_4
+#@end core/mass-edit11
+#@begin core/mass-edit12 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_4
+#@out name_5
+#@end core/mass-edit12
+#@begin core/mass-edit13 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_5
+#@out name_6
+#@end core/mass-edit13
+#@begin core/mass-edit14 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_6
+#@out name_7
+#@end core/mass-edit14
+#@begin core/mass-edit15 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_7
+#@out name_8
+#@end core/mass-edit15
+#@begin core/mass-edit16 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_8
+#@out name_9
+#@end core/mass-edit16
+#@begin core/mass-edit17 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_9
+#@out name_10
+#@end core/mass-edit17
+#@begin core/mass-edit18 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_10
+#@out name_11
+#@end core/mass-edit18
+#@begin core/mass-edit19 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_11
+#@out name_12
+#@end core/mass-edit19
+#@begin core/mass-edit20 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_12
+#@out name_13
+#@end core/mass-edit20
+#@begin core/mass-edit21 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_13
+#@out name_14
+#@end core/mass-edit21
+#@begin core/mass-edit22 #@desc Mass edit cells in column name
+#@param expression:value
+#@in name_14
+#@out name_15
+#@end core/mass-edit22
+#@begin core/text-transform23 #@desc Text transform on cells in column first_appeared using expression jython:if value < 1850 or value > 2020:
+  return None
+else:
+  return value
+#@param expression:jython:if_value_<_1850_or_value_>_2020:
+__return_None
+else:
+__return_value
+#@in first_appeared_1
+#@out first_appeared_2
+#@end core/text-transform23
+#@begin core/text-transform24 #@desc Text transform on cells in column last_appeared using expression jython:if value < 1850 or value > 2020:
+  return None
+else:
+  return value
+#@param expression:jython:if_value_<_1850_or_value_>_2020:
+__return_None
+else:
+__return_value
+#@in last_appeared_1
+#@out last_appeared_2
+#@end core/text-transform24
+#@begin CombineDataCleaningChanges
+#@in name_15
+#@in id_1
+#@in menus_appeared_1
+#@in times_appeared_1
+#@in first_appeared_2
+#@in last_appeared_2
+#@in lowest_price_1
+#@in highest_price_1
+#@in description
+#@in remove-description
+#@out CleanData
+#@end CombineDataCleaningChanges
+#@end Parallel_OR

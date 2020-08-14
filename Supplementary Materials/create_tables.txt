@@ -1,0 +1,63 @@
+/* Create the schema */
+CREATE SCHEMA `menus` DEFAULT CHARACTER SET utf8 ;
+
+/* Create Dish table */
+CREATE TABLE `menus`.`Dish` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(2000) NULL,
+  `menus_appeared` INT NULL,
+  `times_appeared` INT NULL,
+  `first_appeared` INT NULL,
+  `last_appeared` INT NULL,
+  `lowest_price` DECIMAL(10,2) NULL,
+  `highest_price` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+/* Create MenuItem table */
+CREATE TABLE `menus`.`MenuItem` (
+  `id` INT NOT NULL,
+  `menu_page_id` INT NULL,
+  `price` DECIMAL(10,2) NULL,
+  `high_price` DECIMAL(10,2) NULL,
+  `dish_id` INT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  `xpos` DECIMAL(7,6) NULL,
+  `ypos` DECIMAL(7,6) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+/* Create MenuPage table */
+CREATE TABLE `menus`.`MenuPage` (
+  `id` INT NOT NULL,
+  `menu_id` INT NULL,
+  `page_number` INT NULL,
+  `image_id` INT NULL,
+  `full_height` INT NULL,
+  `full_width` INT NULL,
+  `uuid` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+  
+/* Create Menu table */
+CREATE TABLE `menus`.`Menu` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(100) NULL,
+  `sponsor` VARCHAR(100) NULL,
+  `event` VARCHAR(100) NULL,
+  `venue` VARCHAR(100) NULL,
+  `place` VARCHAR(100) NULL,
+  `physical_description` VARCHAR(100) NULL,
+  `occasion` VARCHAR(100) NULL,
+  `notes` VARCHAR(2000) NULL,
+  `call_number` VARCHAR(45) NULL,
+  `date` DATE NULL,
+  `location` VARCHAR(100) NULL,
+  `currency` VARCHAR(45) NULL,
+  `currency_symbol` VARCHAR(45) NULL,
+  `status` VARCHAR(45) NULL,
+  `page_count` INT NULL,
+  `dish_count` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));

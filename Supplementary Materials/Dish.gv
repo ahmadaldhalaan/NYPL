@@ -1,0 +1,185 @@
+
+/* Start of top-level graph */
+digraph Workflow {
+rankdir=TB
+
+/* Title for graph */
+fontname=Helvetica; fontsize=18; labelloc=t
+label=Linear_OR
+
+/* Start of double cluster for drawing box around nodes in workflow */
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; penwidth=0
+
+/* Style for nodes representing atomic programs in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing atomic programs in workflow */
+"core/text-transform0#" [shape=record rankdir=LR label="{<f0> core/text-transform0# |<f1> Text transform on cells in column name using expression value.trim()}"];
+"core/text-transform1#" [shape=record rankdir=LR label="{<f0> core/text-transform1# |<f1> Text transform on cells in column name using expression value.replace(/\\s+/,' ')}"];
+"core/text-transform2#" [shape=record rankdir=LR label="{<f0> core/text-transform2# |<f1> Text transform on cells in column id using expression value.toNumber()}"];
+"core/text-transform3#" [shape=record rankdir=LR label="{<f0> core/text-transform3# |<f1> Text transform on cells in column menus_appeared using expression value.toNumber()}"];
+"core/text-transform4#" [shape=record rankdir=LR label="{<f0> core/text-transform4# |<f1> Text transform on cells in column times_appeared using expression value.toNumber()}"];
+"core/text-transform5#" [shape=record rankdir=LR label="{<f0> core/text-transform5# |<f1> Text transform on cells in column first_appeared using expression value.toNumber()}"];
+"core/text-transform6#" [shape=record rankdir=LR label="{<f0> core/text-transform6# |<f1> Text transform on cells in column last_appeared using expression value.toNumber()}"];
+"core/text-transform7#" [shape=record rankdir=LR label="{<f0> core/text-transform7# |<f1> Text transform on cells in column lowest_price using expression value.toNumber()}"];
+"core/text-transform8#" [shape=record rankdir=LR label="{<f0> core/text-transform8# |<f1> Text transform on cells in column highest_price using expression value.toNumber()}"];
+"core/column-removal0#" [shape=record rankdir=LR label="{<f0> core/column-removal0# |<f1> Remove column description}"];
+"core/mass-edit0#" [shape=record rankdir=LR label="{<f0> core/mass-edit0# |<f1> Mass edit cells in column name}"];
+"core/mass-edit1#" [shape=record rankdir=LR label="{<f0> core/mass-edit1# |<f1> Mass edit cells in column name}"];
+"core/mass-edit2#" [shape=record rankdir=LR label="{<f0> core/mass-edit2# |<f1> Mass edit cells in column name}"];
+"core/mass-edit3#" [shape=record rankdir=LR label="{<f0> core/mass-edit3# |<f1> Mass edit cells in column name}"];
+"core/mass-edit4#" [shape=record rankdir=LR label="{<f0> core/mass-edit4# |<f1> Mass edit cells in column name}"];
+"core/mass-edit5#" [shape=record rankdir=LR label="{<f0> core/mass-edit5# |<f1> Mass edit cells in column name}"];
+"core/mass-edit6#" [shape=record rankdir=LR label="{<f0> core/mass-edit6# |<f1> Mass edit cells in column name}"];
+"core/mass-edit7#" [shape=record rankdir=LR label="{<f0> core/mass-edit7# |<f1> Mass edit cells in column name}"];
+"core/mass-edit8#" [shape=record rankdir=LR label="{<f0> core/mass-edit8# |<f1> Mass edit cells in column name}"];
+"core/mass-edit9#" [shape=record rankdir=LR label="{<f0> core/mass-edit9# |<f1> Mass edit cells in column name}"];
+"core/mass-edit10#" [shape=record rankdir=LR label="{<f0> core/mass-edit10# |<f1> Mass edit cells in column name}"];
+"core/mass-edit11#" [shape=record rankdir=LR label="{<f0> core/mass-edit11# |<f1> Mass edit cells in column name}"];
+"core/mass-edit12#" [shape=record rankdir=LR label="{<f0> core/mass-edit12# |<f1> Mass edit cells in column name}"];
+"core/text-transform9#" [shape=record rankdir=LR label="{<f0> core/text-transform9# |<f1> Text transform on cells in column first_appeared using expression jython\:if value < 1850 or value > 2020\:}"];
+"core/text-transform10#" [shape=record rankdir=LR label="{<f0> core/text-transform10# |<f1> Text transform on cells in column last_appeared using expression jython\:if value < 1850 or value > 2020\:}"];
+
+/* Style for nodes representing non-parameter data channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes for non-parameter data channels in workflow */
+table25
+table0
+table1
+table2
+table3
+table4
+table5
+table6
+table7
+table8
+table9
+table10
+table11
+table12
+table13
+table14
+table15
+table16
+table17
+table18
+table19
+table20
+table21
+table22
+table23
+table24
+
+/* Style for nodes representing parameter channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing parameter channels in workflow */
+"col-name:name"
+"expression:value.trim()"
+"expression:value.replace(/\\s+/,'_')"
+"col-name:id"
+"expression:value.toNumber()"
+"col-name:menus_appeared"
+"col-name:times_appeared"
+"col-name:first_appeared"
+"col-name:last_appeared"
+"col-name:lowest_price"
+"col-name:highest_price"
+"col-name:description"
+"expression:jython:if_value_<_1850_or_value_>_2020:"
+
+/* Edges representing connections between programs and channels */
+"core/text-transform0#" -> table1
+"col-name:name" -> "core/text-transform0#"
+"expression:value.trim()" -> "core/text-transform0#"
+table0 -> "core/text-transform0#"
+"core/text-transform1#" -> table2
+"col-name:name" -> "core/text-transform1#"
+"expression:value.replace(/\\s+/,'_')" -> "core/text-transform1#"
+table1 -> "core/text-transform1#"
+"core/text-transform2#" -> table3
+"col-name:id" -> "core/text-transform2#"
+"expression:value.toNumber()" -> "core/text-transform2#"
+table2 -> "core/text-transform2#"
+"core/text-transform3#" -> table4
+"col-name:menus_appeared" -> "core/text-transform3#"
+"expression:value.toNumber()" -> "core/text-transform3#"
+table3 -> "core/text-transform3#"
+"core/text-transform4#" -> table5
+"col-name:times_appeared" -> "core/text-transform4#"
+"expression:value.toNumber()" -> "core/text-transform4#"
+table4 -> "core/text-transform4#"
+"core/text-transform5#" -> table6
+"col-name:first_appeared" -> "core/text-transform5#"
+"expression:value.toNumber()" -> "core/text-transform5#"
+table5 -> "core/text-transform5#"
+"core/text-transform6#" -> table7
+"col-name:last_appeared" -> "core/text-transform6#"
+"expression:value.toNumber()" -> "core/text-transform6#"
+table6 -> "core/text-transform6#"
+"core/text-transform7#" -> table8
+"col-name:lowest_price" -> "core/text-transform7#"
+"expression:value.toNumber()" -> "core/text-transform7#"
+table7 -> "core/text-transform7#"
+"core/text-transform8#" -> table9
+"col-name:highest_price" -> "core/text-transform8#"
+"expression:value.toNumber()" -> "core/text-transform8#"
+table8 -> "core/text-transform8#"
+"core/column-removal0#" -> table10
+"col-name:description" -> "core/column-removal0#"
+table9 -> "core/column-removal0#"
+"core/mass-edit0#" -> table11
+"col-name:name" -> "core/mass-edit0#"
+table10 -> "core/mass-edit0#"
+"core/mass-edit1#" -> table12
+"col-name:name" -> "core/mass-edit1#"
+table11 -> "core/mass-edit1#"
+"core/mass-edit2#" -> table13
+"col-name:name" -> "core/mass-edit2#"
+table12 -> "core/mass-edit2#"
+"core/mass-edit3#" -> table14
+"col-name:name" -> "core/mass-edit3#"
+table13 -> "core/mass-edit3#"
+"core/mass-edit4#" -> table15
+"col-name:name" -> "core/mass-edit4#"
+table14 -> "core/mass-edit4#"
+"core/mass-edit5#" -> table16
+"col-name:name" -> "core/mass-edit5#"
+table15 -> "core/mass-edit5#"
+"core/mass-edit6#" -> table17
+"col-name:name" -> "core/mass-edit6#"
+table16 -> "core/mass-edit6#"
+"core/mass-edit7#" -> table18
+"col-name:name" -> "core/mass-edit7#"
+table17 -> "core/mass-edit7#"
+"core/mass-edit8#" -> table19
+"col-name:name" -> "core/mass-edit8#"
+table18 -> "core/mass-edit8#"
+"core/mass-edit9#" -> table20
+"col-name:name" -> "core/mass-edit9#"
+table19 -> "core/mass-edit9#"
+"core/mass-edit10#" -> table21
+"col-name:name" -> "core/mass-edit10#"
+table20 -> "core/mass-edit10#"
+"core/mass-edit11#" -> table22
+"col-name:name" -> "core/mass-edit11#"
+table21 -> "core/mass-edit11#"
+"core/mass-edit12#" -> table23
+"col-name:name" -> "core/mass-edit12#"
+table22 -> "core/mass-edit12#"
+"core/text-transform9#" -> table24
+"col-name:first_appeared" -> "core/text-transform9#"
+"expression:jython:if_value_<_1850_or_value_>_2020:" -> "core/text-transform9#"
+table23 -> "core/text-transform9#"
+"core/text-transform10#" -> table25
+"col-name:last_appeared" -> "core/text-transform10#"
+"expression:jython:if_value_<_1850_or_value_>_2020:" -> "core/text-transform10#"
+table24 -> "core/text-transform10#"
+
+/* End of double cluster for drawing box around nodes in workflow */
+}}
+
+/* End of top-level graph */
+}

@@ -1,0 +1,101 @@
+/* IC 1: Each MenuPage record has a corresponding Menu record */
+
+/* Check for MenuPage records with NULL menu_id */
+SELECT * FROM menus.MenuPage WHERE menu_id IS NULL
+0 row(s) returned
+
+/* Check for MenuPage records with menu_id not present in Menu table */
+SELECT * FROM menus.MenuPage WHERE menu_id IS NOT NULL AND menu_id NOT IN (SELECT id FROM Menu)
+5803 row(s) returned
+
+
+/* IC 2: Each MenuItem record has a corresponding MenuPage record */
+
+/* Check for MenuItem records with NULL menu_page_id */
+SELECT * FROM menus.MenuItem WHERE menu_page_id IS NULL
+0 row(s) returned
+
+/* Check for MenuItem records with menu_page_id not present in MenuPage table */
+SELECT * FROM menus.MenuItem WHERE menu_page_id IS NOT NULL AND menu_page_id NOT IN (SELECT id FROM MenuPage)
+0 row(s) returned
+
+
+/* IC 3: Each MenuItem record has a corresponding Dish record */
+
+/* Check for MenuItem records with NULL dish_id */
+SELECT * FROM MenuItem WHERE dish_id IS NULL
+241 row(s) returned
+
+/* Check for MenuItem records with dish_id not present in Dish table */
+SELECT * FROM MenuItem WHERE dish_id IS NOT NULL AND dish_id NOT IN (SELECT id FROM Dish)
+3 row(s) returned
+
+
+/* IC 4: Number of MenuPage records for each Menu matches the page_count field in the Menu record */
+
+SELECT * FROM
+(SELECT menu_id, count(menu_id) AS calculated_page_count, page_count
+FROM MenuPage
+INNER JOIN Menu ON MenuPage.menu_id = Menu.id
+GROUP BY MenuPage.menu_id) AS x
+WHERE calculated_page_count <> page_count
+0 row(s) returned
+
+
+/* IC5: Total number of MenuItem records across each MenuPage for a Menu matches the dish_count field in the Menu record */
+
+SELECT * FROM
+(SELECT Menu.id as menu_id, dish_id, count(dish_id) as calculated_dish_count, dish_count
+FROM MenuItem
+INNER JOIN MenuPage ON MenuItem.menu_page_id = MenuPage.id
+INNER JOIN Menu ON MenuPage.menu_id = Menu.id
+GROUP BY menu_id) AS x
+WHERE calculated_dish_count <> dish_count
+211 row(s) returned
+
+
+/* IC6: first_appeared and last_appeared fields in Dish table match earliest and latest date fields in corresponding Menu records */
+
+SELECT * FROM
+(SELECT Dish.id, first_appeared, last_appeared, year(min(Menu.date)) AS min_year, year(max(Menu.date)) as max_year
+FROM Dish
+INNER JOIN MenuItem ON Dish.id = MenuItem.dish_id
+INNER JOIN MenuPage ON MenuItem.menu_page_id = MenuPage.id
+INNER JOIN Menu ON MenuPage.menu_id = Menu.id
+GROUP BY Dish.id) AS x
+WHERE min_year <> first_appeared OR max_year <> last_appeared
+5847 row(s) returned
+
+
+/* IC7: price field in MenuItem record is in range of lowest_price / highest_price for corresponding Dish record */
+
+SELECT *
+FROM MenuItem
+INNER JOIN Dish ON MenuItem.dish_id = Dish.id
+WHERE price < lowest_price OR price > highest_price
+151833 row(s) returned
+
+
+/* IC8: menus_appeared field in Dish record corresponds to the actual number of Menu records with which the Dish is associated (via MenuItem and MenuPage records) */
+
+SELECT * FROM
+(SELECT Dish.id, menus_appeared, count(Menu.id) AS calculated_menus_appeared
+FROM Dish
+INNER JOIN MenuItem ON Dish.id = MenuItem.dish_id
+INNER JOIN MenuPage ON MenuItem.menu_page_id = MenuPage.id
+INNER JOIN Menu ON MenuPage.menu_id = Menu.id
+GROUP BY Dish.id) AS x
+WHERE calculated_menus_appeared <> menus_appeared
+10783 row(s) returned
+
+
+/* IC9: times_appeared field in Dish record corresponds to the actual number of times the Dish is referenced by a MenuItem record */
+
+SELECT * FROM
+(SELECT dish_id, count(dish_id) AS calculated_times_appeared, times_appeared
+FROM MenuItem
+INNER JOIN Dish ON MenuItem.dish_id = Dish.id
+GROUP BY MenuItem.dish_id) AS x
+WHERE calculated_times_appeared <> times_appeared
+136 row(s) returned
+

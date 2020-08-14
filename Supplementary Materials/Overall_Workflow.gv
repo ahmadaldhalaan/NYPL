@@ -1,0 +1,100 @@
+digraph Workflow {
+rankdir=LR
+fontname=Courier; fontsize=18; labelloc=t
+label=MenuDatasetCleaning
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; color=white
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+OpenRefineMenu
+OpenRefineDish
+OpenRefineMenuItem
+OpenRefineMenuPage
+MySQLLoaderMenu
+MySQLLoaderDish
+MySQLLoaderMenuItem
+MySQLLoaderMenuPage
+MySQLIntegrityCleaning
+MySQLExportMenu
+MySQLExportDish
+MySQLExportMenuItem
+MySQLExportMenuPage
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+"Menu_Clean.csv"
+"Dish_Clean.csv"
+"MenuItem_Clean.csv"
+"MenuPage_Clean.csv"
+"Menu.csv"
+"Dish.csv"
+"MenuItem.csv"
+"MenuPage.csv"
+"Menu1.csv"
+"Dish1.csv"
+"MenuItem1.csv"
+"MenuPage1.csv"
+"menus.Menu"
+"menus.Dish"
+"menus.MenuItem"
+"menus.MenuPage"
+"menus.Menu_clean"
+"menus.Dish_clean"
+"menus.MenuItem_clean"
+"menus.MenuPage_clean"
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+OpenRefineMenu -> "Menu1.csv"
+"Menu.csv" -> OpenRefineMenu
+OpenRefineDish -> "Dish1.csv"
+"Dish.csv" -> OpenRefineDish
+OpenRefineMenuItem -> "MenuItem1.csv"
+"MenuItem.csv" -> OpenRefineMenuItem
+OpenRefineMenuPage -> "MenuPage1.csv"
+"MenuPage.csv" -> OpenRefineMenuPage
+MySQLLoaderMenu -> "menus.Menu"
+"Menu1.csv" -> MySQLLoaderMenu
+MySQLLoaderDish -> "menus.Dish"
+"Dish1.csv" -> MySQLLoaderDish
+MySQLLoaderMenuItem -> "menus.MenuItem"
+"MenuItem1.csv" -> MySQLLoaderMenuItem
+MySQLLoaderMenuPage -> "menus.MenuPage"
+"MenuPage1.csv" -> MySQLLoaderMenuPage
+MySQLIntegrityCleaning -> "menus.Menu_clean"
+MySQLIntegrityCleaning -> "menus.Dish_clean"
+MySQLIntegrityCleaning -> "menus.MenuItem_clean"
+MySQLIntegrityCleaning -> "menus.MenuPage_clean"
+"menus.Menu" -> MySQLIntegrityCleaning
+"menus.Dish" -> MySQLIntegrityCleaning
+"menus.MenuItem" -> MySQLIntegrityCleaning
+"menus.MenuPage" -> MySQLIntegrityCleaning
+MySQLExportMenu -> "Menu_Clean.csv"
+"menus.Menu_clean" -> MySQLExportMenu
+MySQLExportDish -> "Dish_Clean.csv"
+"menus.Dish_clean" -> MySQLExportDish
+MySQLExportMenuItem -> "MenuItem_Clean.csv"
+"menus.MenuItem_clean" -> MySQLExportMenuItem
+MySQLExportMenuPage -> "MenuPage_Clean.csv"
+"menus.MenuPage_clean" -> MySQLExportMenuPage
+}}
+subgraph cluster_input_ports_group_outer { label=""; color=white
+subgraph cluster_input_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+"Menu.csv_input_port" [label=""]
+"Dish.csv_input_port" [label=""]
+"MenuItem.csv_input_port" [label=""]
+"MenuPage.csv_input_port" [label=""]
+}}
+subgraph cluster_output_ports_group_outer { label=""; color=white
+subgraph cluster_output_ports_group_inner { label=""; color=white
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+"Menu_Clean.csv_output_port" [label=""]
+"Dish_Clean.csv_output_port" [label=""]
+"MenuItem_Clean.csv_output_port" [label=""]
+"MenuPage_Clean.csv_output_port" [label=""]
+}}
+"Menu.csv_input_port" -> "Menu.csv"
+"Dish.csv_input_port" -> "Dish.csv"
+"MenuItem.csv_input_port" -> "MenuItem.csv"
+"MenuPage.csv_input_port" -> "MenuPage.csv"
+"Menu_Clean.csv" -> "Menu_Clean.csv_output_port"
+"Dish_Clean.csv" -> "Dish_Clean.csv_output_port"
+"MenuItem_Clean.csv" -> "MenuItem_Clean.csv_output_port"
+"MenuPage_Clean.csv" -> "MenuPage_Clean.csv_output_port"
+}
